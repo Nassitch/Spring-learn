@@ -12,6 +12,10 @@ public class BadgeController {
 
     private final BadgeService badgeService;
 
+    public BadgeController(BadgeService badgeService) {
+        this.badgeService = badgeService;
+    }
+
     @GetMapping("/get/all")
     public ResponseEntity<List<Badge>> getAllBadges() {
         List<Badge> badges = badgeService.getAll();
@@ -36,6 +40,17 @@ public class BadgeController {
             return new ResponseEntity<>(updateBadge, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public ResponseEntity<String> removeBadge(@PathVariable("id") Long id) {
+        try {
+            String deleteBadge = badgeService.delete(id);
+            return new ResponseEntity<>(deleteBadge, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            String errorMsg = "This id: '" + id + "' was not found.";
+            return new ResponseEntity<>(errorMsg, HttpStatus.NOT_FOUND);
         }
     }
 }

@@ -18,4 +18,13 @@ public class Badge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean isActive = false;
+
+    public Badge(Long id, boolean isActive) {
+        this.id = id;
+        this.isActive = isActive;
+    }
+
+    public boolean getActive() {
+        return this.isActive;
+    }
 }
