@@ -1,19 +1,16 @@
 package com.intro.storecoffe.store;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.intro.storecoffe.coffee.Coffee;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 @Entity
-//@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@RequiredArgsConstructor
 public class Store {
 
     @Id
@@ -28,19 +25,7 @@ public class Store {
         this.location = location;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public String getLocation() {
-        return this.location;
-    }
-
-    public void setName(String newName) {
-        this.name = newName;
-    }
-
-    public void setLocation(String newLocation) {
-        this.location = newLocation;
-    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("stores")
+    private List<Coffee> coffees = new ArrayList<>();
 }

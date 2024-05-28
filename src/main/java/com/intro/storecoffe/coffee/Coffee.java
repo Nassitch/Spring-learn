@@ -1,17 +1,18 @@
 package com.intro.storecoffe.coffee;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.intro.storecoffe.store.Store;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
-@RequiredArgsConstructor
-@Builder
 @Entity
+@RequiredArgsConstructor
 public class Coffee {
 
     @Id
@@ -26,4 +27,7 @@ public class Coffee {
         this.price = price;
     }
 
+    @ManyToMany(mappedBy = "coffees")
+    @JsonIgnoreProperties("coffees")
+    private List<Store> stores = new ArrayList<>();
 }
