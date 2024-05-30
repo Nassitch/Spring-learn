@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/employee")
@@ -50,5 +51,10 @@ public class EmployeeController {
             String errorMsg = "This id '" + id + "' is not found.";
             return new ResponseEntity<>(errorMsg, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/store/{storeId}")
+    public Optional<Employee> getEmployeesByStoreId(@PathVariable Long storeId) {
+        return employeeService.findByStoreId(storeId);
     }
 }
