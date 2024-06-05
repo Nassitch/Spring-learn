@@ -16,9 +16,10 @@ public class CoffeeController {
     private final CoffeeService service;
 
     @GetMapping("/get/all")
-    public ResponseEntity<List<Coffee>> getAll() {
+    public ResponseEntity<List<CoffeeDTO>> getAll() {
         List<Coffee> coffees = service.getAll();
-        return new ResponseEntity<>(coffees, HttpStatus.OK);
+        List<CoffeeDTO> coffeeDTOS = coffees.stream().map(CoffeeDTO::mapFromEntity).toList();
+        return new ResponseEntity<>(coffeeDTOS, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
