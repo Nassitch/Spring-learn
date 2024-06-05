@@ -27,9 +27,10 @@ public class Store {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("stores")
     private List<Coffee> coffees = new ArrayList<>();
 
     @OneToMany(mappedBy = "store")
     @JsonIgnoreProperties("store")
-    public List<Employee> employees = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
 }

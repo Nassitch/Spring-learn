@@ -3,7 +3,6 @@ package com.intro.storecoffe.coffee;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.intro.storecoffe.store.Store;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

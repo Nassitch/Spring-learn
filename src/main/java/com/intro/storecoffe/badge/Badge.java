@@ -1,17 +1,14 @@
 package com.intro.storecoffe.badge;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.intro.storecoffe.employee.Employee;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
-@Builder
 @Entity
+@RequiredArgsConstructor
 public class Badge {
 
     @Id
@@ -27,4 +24,8 @@ public class Badge {
     public boolean getActive() {
         return this.isActive;
     }
+
+    @OneToOne(mappedBy = "badge")
+    @JsonIgnoreProperties("badge")
+    private Employee employee;
 }

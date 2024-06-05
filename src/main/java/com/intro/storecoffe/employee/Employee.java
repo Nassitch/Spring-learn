@@ -1,14 +1,11 @@
 package com.intro.storecoffe.employee;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.intro.storecoffe.badge.Badge;
 import com.intro.storecoffe.store.Store;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
-import java.util.Set;
 
 @Data
 @Entity
@@ -27,4 +24,9 @@ public class Employee {
     @JoinColumn(name = "store_id")
     @JsonIgnoreProperties("employees")
     private Store store;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "badge_id")
+    @JsonIgnoreProperties("employee")
+    private Badge badge;
 }

@@ -47,4 +47,8 @@ public class EmployeeService {
             throw new IllegalArgumentException("Coffee not found with id: " + id);
         }
     }
+
+    public Optional<Employee> findByStoreId(Long storeId) {
+        return employeeRepository.findById(storeId);
+    }
 }
