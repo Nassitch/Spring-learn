@@ -6,7 +6,7 @@ public record EmployeeDTO(
         String lastName,
         short age,
         float salary,
-        String string) {
+        String employeeId) {
 
     public static EmployeeDTO mapFromEntity(Employee employee) {
         return new EmployeeDTO(
