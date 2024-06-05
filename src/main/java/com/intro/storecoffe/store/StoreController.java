@@ -15,8 +15,10 @@ public class StoreController {
     private final StoreService storeService;
 
     @GetMapping("/get/all")
-    public List<Store> getAll() {
-        return storeService.getAll();
+    public ResponseEntity<List<StoreDTO>> getAll() {
+        List<Store> stores = storeService.getAll();
+        List<StoreDTO> storeDTOS = stores.stream().map(StoreDTO::mapFromEntity).toList();
+        return new ResponseEntity<>(storeDTOS, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")

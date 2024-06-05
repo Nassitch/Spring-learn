@@ -2,6 +2,7 @@ package com.intro.storecoffe.store;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.intro.storecoffe.coffee.Coffee;
+import com.intro.storecoffe.employee.Employee;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,9 @@ public class Store {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("stores")
     private List<Coffee> coffees = new ArrayList<>();
+
+    @OneToMany(mappedBy = "store")
+    @JsonIgnoreProperties("store")
+    public List<Employee> employees = new ArrayList<>();
 }

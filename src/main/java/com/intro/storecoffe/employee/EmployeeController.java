@@ -15,9 +15,10 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("/get/all")
-    public ResponseEntity<List<Employee>> getAll() {
+    public ResponseEntity<List<EmployeeDTO>> getAll() {
         List<Employee> employees = employeeService.getAll();
-        return new ResponseEntity<>(employees, HttpStatus.OK);
+        List<EmployeeDTO> employeeDTOS = employees.stream().map(EmployeeDTO::mapFromEntity).toList();
+        return new ResponseEntity<>(employeeDTOS, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
